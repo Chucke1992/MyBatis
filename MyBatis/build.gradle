@@ -5,7 +5,6 @@ apply plugin: 'application'
 apply plugin: 'liquibase'
 
 mainClassName = "main.java.org.myapp.Main"
-
 import groovy.sql.Sql 
 
 class PropWrapper {
