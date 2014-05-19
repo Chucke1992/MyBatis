@@ -10,6 +10,9 @@ import main.java.org.myapp.service.SimpleService;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		System.out.println("MASTER");
+		
 		SimpleMapper simpleService = new SimpleService();
 		List<SimpleObject> sObjects = simpleService.findAllObjects();
 		System.out.println("Database data");
