@@ -10,36 +10,66 @@
 	</preConditions>
 	
 	<changeSet id="createTable" author="Artsiom_Tsaryonau">
-		 <createTable tableName="SimpleTable" schemaName="testschema">
+		 <createTable tableName="XSimpleTable" schemaName="testschema">
 		     <column name="id" type="int"/>
 		     <column name="text" type="varchar(255)" />
 		 </createTable>
 		 <rollback>
-		     <dropTable tableName="SimpleTable" schemaName="testschema"/>
+		     <dropTable tableName="XSimpleTable" schemaName="testschema"/>
 		 </rollback>
     </changeSet>
     
     <changeSet id="insertTableData" author="Artsiom_Tsaryonay">
-    	<insert tableName="SimpleTable" schemaName="testschema">
+    	<insert tableName="XSimpleTable" schemaName="testschema">
     		<column name="id" value="1"></column>
     		<column name="text" value="Simple text"></column>
     	</insert>
     	<rollback>
-    		DELETE FROM SimpleTable WHERE id=1
+    		DELETE FROM testschema."XSimpleTable" WHERE id=1
     	</rollback>
     </changeSet>
 
 	<changeSet id="addPrimaryKey" author="Artiom_Tsaryonay">
-		<addPrimaryKey tableName="SimpleTable" schemaName="testschema" columnNames="id"/>
+		<addPrimaryKey tableName="XSimpleTable" schemaName="testschema" columnNames="id"/>
 	</changeSet>
 	
 	<changeSet id="insertTableData1" author="Artsiom_Tsaryonau">
-		<insert tableName="SimpleTable" schemaName="testschema">
+		<insert tableName="XSimpleTable" schemaName="testschema">
 			<column name="id" value="2"></column>
 			<column name="text" value="Simple text 2"></column>
 		</insert>
 		<rollback>
-			DELETE FROM SimpleTable WHERE id=2
+			DELETE FROM testschema."XSimpleTable" WHERE id=2
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="insertTableData2" author="Artsiom_Tsaryonau">
+		<insert tableName="XSimpleTable" schemaName="testschema">
+			<column name="id" value="3"></column>
+			<column name="text" value="Simple text 3"></column>
+		</insert>
+		<rollback>
+			DELETE FROM testschema."XSimpleTable" WHERE id=3
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="insertTableData3" author="Artsiom_Tsaryonau">
+		<insert tableName="XSimpleTable" schemaName="testschema">
+			<column name="id" value="4"></column>
+			<column name="text" value="Simple text 4"></column>
+		</insert>
+		<rollback>
+			DELETE FROM testschema."XSimpleTable" WHERE id=4
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="insertTableData4" author="Artsiom_Tsaryonau">
+		<insert tableName="XSimpleTable" schemaName="testschema">
+			<column name="id" value="5"></column>
+			<column name="text" value="Simple text 5"></column>
+		</insert>
+		<rollback>
+			DELETE FROM testschema."XSimpleTable" WHERE id=5
 		</rollback>
 	</changeSet>
 	

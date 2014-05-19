@@ -8,6 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="text" column="text" />
 	</resultMap>
 	<select id="findAllObjects" resultMap="SimpleObjectResult">
-		SELECT * FROM SimpleTable
+		SELECT * FROM testschema."XSimpleTable";
 	</select>
 </mapper>
