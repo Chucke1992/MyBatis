@@ -83,4 +83,14 @@
 		</rollback>
 	</changeSet>
 	
+	<changeSet id="insertTableData6" author="Artsiom_Tsaryonau">
+		<insert tableName="XSimpleTable" schemaName="testschema">
+			<column name="id" value="7"></column>
+			<column name="text" value="Simple text 7"></column>
+		</insert>
+		<rollback>
+			DELETE FROM testschema."XSimpleTable" WHERE id=7
+		</rollback>
+	</changeSet>
+	
 </databaseChangeLog>
