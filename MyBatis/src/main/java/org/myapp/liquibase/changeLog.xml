@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<preConditions>
+		<dbms type="postgresql"/>
+	</preConditions>
+	
+	<changeSet id="createTable" author="Artsiom_Tsaryonau">
+		 <createTable tableName="SimpleTable" schemaName="testschema">
+		     <column name="id" type="int"/>
+		     <column name="text" type="varchar(255)" />
+		 </createTable>
+		 <rollback>
+		     <dropTable tableName="SimpleTable" schemaName="testschema"/>
+		 </rollback>
+    </changeSet>
+    
+    <changeSet id="insertTableData" author="Artsiom_Tsaryonay">
+    	<insert tableName="SimpleTable" schemaName="testschema">
+    		<column name="id" value="1"></column>
+    		<column name="text" value="Simple text"></column>
+    	</insert>
+    	<rollback>
+    		DELETE FROM SimpleTable WHERE id=1
+    	</rollback>
+    </changeSet>
+
+	<changeSet id="addPrimaryKey" author="Artiom_Tsaryonay">
+		<addPrimaryKey tableName="SimpleTable" schemaName="testschema" columnNames="id"/>
+	</changeSet>
+	
+	<changeSet id="insertTableData1" author="Artsiom_Tsaryonau">
+		<insert tableName="SimpleTable" schemaName="testschema">
+			<column name="id" value="2"></column>
+			<column name="text" value="Simple text 2"></column>
+		</insert>
+		<rollback>
+			DELETE FROM SimpleTable WHERE id=2
+		</rollback>
+	</changeSet>
+	
+</databaseChangeLog>

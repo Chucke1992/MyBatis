@@ -1,0 +1,100 @@
+apply plugin: 'java'
+apply plugin: 'liquibase'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'liquibase'
+
+mainClassName = "main.java.org.myapp.Main"
+
+import groovy.sql.Sql 
+
+class PropWrapper {
+	String dbName
+	String dbAdmin
+	String dbPassword
+	String dbDatabase
+	String dbRootDatabase
+	String dbDriver
+	Properties props
+	
+	PropWrapper() {
+		props = new Properties()
+		def computerName = InetAddress.getLocalHost().getHostName()
+		try { 
+			props.load(new FileInputStream("build_" + computerName + ".properties"))
+		} catch(FileNotFoundException fnfe) {
+			props.load(new FileInputStream("build.properties"))
+		}
+		dbRootDatabase = props.getProperty("db.url") + "/postgres"
+		dbName = props.getProperty("db.name")
+		dbDatabase = props.getProperty("db.url") + "/" + dbName
+		dbAdmin = props.getProperty("db.admin")
+		dbPassword = props.getProperty("db.admin.password")
+		dbDriver = props.getProperty("db.driver")
+	}
+}
+PropWrapper p = new PropWrapper()
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	driver
+}
+
+dependencies {
+	compile 'org.mybatis:mybatis:3.2.7'
+	compile 'org.liquibase:liquibase-core:3.1.1'
+	driver 'org.postgresql:postgresql:9.2-1003-jdbc4'
+}
+
+
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.postgresql:postgresql:9.2-1003-jdbc4'
+		classpath 'com.augusttechgroup:gradle-liquibase-plugin:0.6.1'
+	}
+}
+
+changelogs {
+  main {
+    file = file('src/main/java/org/myapp/liquibase/changeLog.xml')
+  }
+}
+
+databases {
+	testDB {
+		url = p.dbDatabase
+		username = p.dbAdmin
+		password = p.dbPassword
+	}
+	defaultDatabase = databases.testDB
+	defaultChangeLogs = changelogs
+}
+
+def executerSQL(sql, directory, files) {
+	fileTree(dir: directory, include: files).each {
+		sql.execute(it.text)
+	}
+}
+
+def initInstanceSQL(db, login, password, driver) {
+	return Sql.newInstance(db, login, password, driver)
+}
+
+task initdb << {
+	URLClassLoader loader = GroovyObject.class.classLoader as URLClassLoader
+	configurations.driver.each { 
+		File file -> loader.addURL(file.toURI().toURL())
+	}
+	Class driver = loader.loadClass(p.dbDriver)
+	def sql = initInstanceSQL(p.dbRootDatabase, p.dbAdmin, p.dbPassword, p.dbDriver)
+	executerSQL(sql, 'src/main/java/org/myapp/sql', "01_initdb.sql")
+	sql = initInstanceSQL(p.dbDatabase, p.dbAdmin, p.dbPassword, p.dbDriver)
+	executerSQL(sql, 'src/main/java/org/myapp/sql', "02_initSchema.sql")
+}
