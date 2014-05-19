@@ -5,6 +5,39 @@ apply plugin: 'application'
 apply plugin: 'liquibase'
 
 mainClassName = "main.java.org.myapp.Main"
+
+sourceSets {
+  main {
+    resources.srcDirs = ["src/main/java"]
+  }
+}
+
+configurations {
+	driver
+}
+
+dependencies {
+	compile 'org.mybatis:mybatis:3.2.7'
+	compile 'org.liquibase:liquibase-core:3.1.1'
+	driver 'org.postgresql:postgresql:9.2-1003-jdbc4'
+}
+
+repositories {
+	mavenCentral()
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.postgresql:postgresql:9.2-1003-jdbc4'
+		classpath 'com.augusttechgroup:gradle-liquibase-plugin:0.6.1'
+	}
+}
+
+
 import groovy.sql.Sql 
 
 class PropWrapper {
@@ -33,32 +66,6 @@ class PropWrapper {
 	}
 }
 PropWrapper p = new PropWrapper()
-
-repositories {
-	mavenCentral()
-}
-
-configurations {
-	driver
-}
-
-dependencies {
-	compile 'org.mybatis:mybatis:3.2.7'
-	compile 'org.liquibase:liquibase-core:3.1.1'
-	driver 'org.postgresql:postgresql:9.2-1003-jdbc4'
-}
-
-
-buildscript {
-	repositories {
-		mavenCentral()
-		jcenter()
-	}
-	dependencies {
-		classpath 'org.postgresql:postgresql:9.2-1003-jdbc4'
-		classpath 'com.augusttechgroup:gradle-liquibase-plugin:0.6.1'
-	}
-}
 
 changelogs {
   main {

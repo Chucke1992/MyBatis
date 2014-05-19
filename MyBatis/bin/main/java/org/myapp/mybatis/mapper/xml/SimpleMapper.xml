@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.org.myapp.mybatis.mapper.java.SimpleMapper">
+<mapper namespace="main.java.org.myapp.mybatis.mapper.java.SimpleMapper">
 	<resultMap type="SimpleObject" id="SimpleObjectResult">
 		<id property="id" column="id" />
 		<result property="text" column="text" />
