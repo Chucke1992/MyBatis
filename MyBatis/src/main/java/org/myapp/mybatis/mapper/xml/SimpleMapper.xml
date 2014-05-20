@@ -15,12 +15,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{item}
 		</foreach>
 	</select>
-	<select id="findObjectByIdAndText" parameterType="main.java.org.myapp.classes.SimpleObject"
-		resultMap="SimpleObjectResult">
-		SELECT * FROM testschema."XSimpleTable"
-		WHERE id = #{id} AND
-		text = #{text}
-	</select>
 	<select id="findObjectByIdAndTextMultiple" resultMap="SimpleObjectResult">
 		SELECT * FROM testschema."XSimpleTable"
 		WHERE id=#{param1} AND text=#{param2}
