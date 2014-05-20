@@ -1,9 +1,7 @@
 package main.java.org.myapp;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import main.java.org.myapp.classes.SimpleObject;
 import main.java.org.myapp.mybatis.mapper.java.SimpleMapper;

@@ -3,6 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<properties resource="build.properties"></properties>
 	<typeAliases>
 		<typeAlias alias="SimpleObject" type="main.java.org.myapp.classes.SimpleObject" />
 	</typeAliases>
@@ -10,10 +11,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="org.postgresql.Driver" />
-				<property name="url" value="jdbc:postgresql://localhost:5432/testdb" />
-				<property name="username" value="postgres" />
-				<property name="password" value="pass" />
+				<property name="driver" value="${db.driver}" />
+				<property name="url" value="${db.url}/${db.name}" />
+				<property name="username" value="${db.admin}" />
+				<property name="password" value="${db.admin.password}" />
 			</dataSource>
 		</environment>
 	</environments>
