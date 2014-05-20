@@ -32,4 +32,15 @@ public class SimpleService implements SimpleMapper {
 		}
 	}
 
+	@Override
+	public List<SimpleObject> findEvenNumbers() {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
+			return simpleMapper.findEvenNumbers();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }
