@@ -10,4 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAllObjects" resultMap="SimpleObjectResult">
 		SELECT * FROM testschema."XSimpleTable";
 	</select>
+	<select id="findObjectsWithIds" resultMap="SimpleObjectResult">
+		SELECT * FROM testschema."XSimpleTable"
+		WHERE ID in
+		<foreach item="item" index="index" collection="list" 
+			open="(" separator="," close=")">
+				#{item}
+		</foreach>
+	</select>
 </mapper>
