@@ -19,6 +19,7 @@ configurations {
 dependencies {
 	compile 'org.mybatis:mybatis:3.2.7'
 	compile 'org.liquibase:liquibase-core:3.1.1'
+	runtime 'org.postgresql:postgresql:9.2-1003-jdbc4'
 	driver 'org.postgresql:postgresql:9.2-1003-jdbc4'
 }
 
@@ -36,7 +37,6 @@ buildscript {
 		classpath 'com.augusttechgroup:gradle-liquibase-plugin:0.6.1'
 	}
 }
-
 
 import groovy.sql.Sql 
 
