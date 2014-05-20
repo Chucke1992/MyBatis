@@ -12,10 +12,12 @@ public interface SimpleMapper {
 	List<SimpleObject> findAllObjects();
 	
 	List<SimpleObject> findObjectsWithIds(@Param("list") List<Integer> ids);
-	
-	//List<SimpleObject> findOddObjects();
-	
+
 	@Select("SELECT * from testschema.\"XSimpleTable\" WHERE (id % 2) = 0")
 	List<SimpleObject> findEvenNumbers();
+	
+	SimpleObject findObjectByIdAndText(SimpleObject so);
+	
+	SimpleObject findObjectByIdAndTextMultiple(@Param("index")Integer id, @Param("data")String text);
 	
 }

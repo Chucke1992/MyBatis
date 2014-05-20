@@ -43,4 +43,26 @@ public class SimpleService implements SimpleMapper {
 		}
 	}
 
+	@Override
+	public SimpleObject findObjectByIdAndText(SimpleObject so) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
+			return simpleMapper.findObjectByIdAndText(so);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	@Override
+	public SimpleObject findObjectByIdAndTextMultiple(Integer id, String text) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
+			return simpleMapper.findObjectByIdAndTextMultiple(id, text);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }
