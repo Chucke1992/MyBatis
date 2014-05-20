@@ -21,27 +21,6 @@ public class SimpleService implements SimpleMapper {
 		}
 	}
 
-	@Override
-	public List<SimpleObject> findObjectsWithIds(List<Integer> ids) {
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		try {
-			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
-			return simpleMapper.findObjectsWithIds(ids);
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	@Override
-	public List<SimpleObject> findEvenNumbers() {
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		try {
-			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
-			return simpleMapper.findEvenNumbers();
-		} finally {
-			sqlSession.close();
-		}
-	}
 
 	@Override
 	public SimpleObject findObjectByIdAndText(SimpleObject so) {
