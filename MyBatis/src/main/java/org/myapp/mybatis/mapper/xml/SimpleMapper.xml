@@ -7,10 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="id" column="id" />
 		<result property="text" column="text" />
 	</resultMap>
-	<select id="findAllObjects" resultMap="SimpleObjectResult">
-		SELECT * FROM
-		testschema."XSimpleTable";
-	</select>
 	<select id="findObjectsWithIds" resultMap="SimpleObjectResult">
 		SELECT * FROM testschema."XSimpleTable"
 		WHERE ID in
@@ -27,6 +23,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="findObjectByIdAndTextMultiple" resultMap="SimpleObjectResult">
 		SELECT * FROM testschema."XSimpleTable"
-		WHERE id=#{index} AND text=#{data}
+		WHERE id=#{param1} AND text=#{param2}
 	</select>
 </mapper>

@@ -11,17 +11,6 @@ import org.apache.ibatis.session.SqlSession;
 public class SimpleService implements SimpleMapper {
 
 	@Override
-	public List<SimpleObject> findAllObjects() {
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		try {
-			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
-			return simpleMapper.findAllObjects();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	@Override
 	public List<SimpleObject> findObjectsWithIds(List<Integer> ids) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
@@ -38,17 +27,6 @@ public class SimpleService implements SimpleMapper {
 		try {
 			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
 			return simpleMapper.findEvenNumbers();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	@Override
-	public SimpleObject findObjectByIdAndText(SimpleObject so) {
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		try {
-			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
-			return simpleMapper.findObjectByIdAndText(so);
 		} finally {
 			sqlSession.close();
 		}

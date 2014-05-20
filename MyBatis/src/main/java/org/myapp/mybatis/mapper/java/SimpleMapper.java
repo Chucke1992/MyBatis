@@ -9,14 +9,10 @@ import main.java.org.myapp.classes.SimpleObject;
 
 public interface SimpleMapper {
 
-	List<SimpleObject> findAllObjects();
-	
 	List<SimpleObject> findObjectsWithIds(@Param("list") List<Integer> ids);
 
 	@Select("SELECT * from testschema.\"XSimpleTable\" WHERE (id % 2) = 0")
 	List<SimpleObject> findEvenNumbers();
-
-	SimpleObject findObjectByIdAndText(SimpleObject so);
 	
 	SimpleObject findObjectByIdAndTextMultiple(@Param("index")Integer id, @Param("data")String text);
 	
