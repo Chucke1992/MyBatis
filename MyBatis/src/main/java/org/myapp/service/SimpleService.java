@@ -1,6 +1,7 @@
 package main.java.org.myapp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import main.java.org.myapp.classes.SimpleObject;
 import main.java.org.myapp.mybatis.MyBatisSqlSessionFactory;
@@ -16,6 +17,17 @@ public class SimpleService implements SimpleMapper {
 		try {
 			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
 			return simpleMapper.findAllObjects();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	@Override
+	public List<SimpleObject> findObjectsWithIds(List<Integer> ids) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			SimpleMapper simpleMapper = sqlSession.getMapper(SimpleMapper.class);
+			return simpleMapper.findObjectsWithIds(ids);
 		} finally {
 			sqlSession.close();
 		}
