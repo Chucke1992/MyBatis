@@ -17,6 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="findObjectByIdAndTextMultiple" resultMap="SimpleObjectResult">
 		SELECT * FROM testschema."XSimpleTable"
-		WHERE id=#{param1} AND text=#{param2}
+		WHERE id=#{index} AND text=#{data}
 	</select>
 </mapper>
